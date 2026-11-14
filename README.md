@@ -18,3 +18,7 @@ Etapas para o desenvolvimento de um teste funcional:
 - Criar casos de teste
 
 Use da sua criatividade para identificar casos de borda (Ex: array tamanho 0, null)
+
+## Teste unitário em Python com Unittest
+Teste unitário: teste realizado em uma parte isolada do algoritmo, como um método.
+Unittest: biblioteca padrão do python utilizada para produzir e executar testes automatizados.
