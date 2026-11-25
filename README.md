@@ -23,16 +23,16 @@ Use da sua criatividade para identificar casos de borda (Ex: array tamanho 0, nu
 Teste unitário: teste realizado em uma parte isolada do sistema, como uma função.
 Conceitos fundamentais para a compreensão de teste unitário:
 
-- **Caso de teste**
+- **Caso de teste** <br>
 Unidade individual de teste, verifica a resposta de um componente em razão de um conjunto de valores de entrada. No unittest, um caso de teste é criado com a classe Testcase, e então os testes são adicionados através de métodos.
 
-- **Test suite**
+- **Test suite** <br>
 Coleção de casos de teste que são executados conjuntamente para demonstrar algum comportamento do software.
 
-- **Fixtures**
+- **Fixtures** <br>
 Conjunto de ações dedicadas a criação de um ambiente apropriado para a execução dos testes. Em unittest costuma-se usar o método setUp().
 
-- **Test runner**
+- **Test runner** <br>
 Componente que executa os casos de teste e comunica os resultados ao usuário.
 
 Unittest: biblioteca padrão do python utilizada para produzir e executar testes automatizados.
