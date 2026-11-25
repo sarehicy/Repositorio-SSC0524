@@ -20,5 +20,35 @@ Etapas para o desenvolvimento de um teste funcional:
 Use da sua criatividade para identificar casos de borda (Ex: array tamanho 0, null)
 
 ## Teste unitário em Python com Unittest
-Teste unitário: teste realizado em uma parte isolada do algoritmo, como um método.
+Teste unitário: teste realizado em uma parte isolada do sistema, como uma função.
+Conceitos fundamentais para a compreensão de teste unitário:
+
+- **Caso de teste**
+Unidade individual de teste, verifica a resposta de um componente em razão de um conjunto de valores de entrada. No unittest, um caso de teste é criado com a classe Testcase, e então os testes são adicionados através de métodos.
+
+- **Test suite**
+Coleção de casos de teste que são executados conjuntamente para demonstrar algum comportamento do software.
+
+- **Fixtures**
+Conjunto de ações dedicadas a criação de um ambiente apropriado para a execução dos testes. Em unittest costuma-se usar o método setUp().
+
+- **Test runner**
+Componente que executa os casos de teste e comunica os resultados ao usuário.
+
 Unittest: biblioteca padrão do python utilizada para produzir e executar testes automatizados.
+```
+    import unittest
+
+    class TestCalculatorSum(unittest.Testcase):
+        def test_positive_sum(self):
+            assertEqual(add(1,2), 3)
+
+        def test_negative_sum(self)
+            pass
+
+    class TestCalculatorSub(unittest.Testcase):
+        def test_positive_sub(self):
+            assertEqual(sub(5,3) 2)
+
+```
+ 
