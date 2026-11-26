@@ -78,6 +78,41 @@ class TesteFuncaoHash(unittest.TestCase):
     def test_integracao_validar_chave_recusa_chave_invalida(self):
         with self.assertRaises(AssertionError):
             self.tabela.funcao_hash(-10)
+
+class TesteProcurarPosicao(unittest.TestCase):
+    def setUp(self):
+        self.tabelaHash = TabelaHashSondagemLinear(5)
+        self.tabelaHash.inserir(4, "ola!")
+
+
+    def test_chave_armazenada_sem_insercao_retorna_indice(self):
+        pos = self.tabelaHash.funcao_hash(4)
+        self.assertEqual(self.tabelaHash._procurar_posicao(4, False), pos)
+
+    def test_chave_inexistente_sem_insercao_retorna_none(self):
+        self.assertEqual(self.tabelaHash._procurar_posicao(2, False), None)
+
+    def test_chave_armazenada_com_insercao_retorna_indice(self):
+        pos = self.tabelaHash.funcao_hash(4)
+        self.assertEqual(self.tabelaHash._procurar_posicao(4, True), pos)
+
+    def test_chave_inexistente_com_insercao_retorna_melhor_pos(self):
+        pos = self.tabelaHash.funcao_hash(2)
+        self.assertEqual(self.tabelaHash._procurar_posicao(2, True), pos)
+
+        #com colisao
+        pos = (self.tabelaHash.funcao_hash(9) + 1)% self.tabelaHash.capacidade
+        self.assertEqual(self.tabelaHash._procurar_posicao(9, True), pos)
+
+    def test_chave_inexistente_com_insercao_tabela_cheia_retorna_none(self):
+        self.tabelaHash.inserir(0, "preenchendo tabela..")
+        self.tabelaHash.inserir(1, "preenchendo tabela..")
+        self.tabelaHash.inserir(2, "preenchendo tabela..")
+        self.tabelaHash.inserir(3, "preenchendo tabela..")
+
+        self.assertEqual(self.tabelaHash._procurar_posicao(5), None)
+
+
     
 if __name__ == '__main__':
     unittest.main()
