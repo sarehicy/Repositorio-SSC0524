@@ -112,6 +112,47 @@ class TesteProcurarPosicao(unittest.TestCase):
 
         self.assertEqual(self.tabelaHash._procurar_posicao(5), None)
 
+class TesteInserir(unittest.TestCase):
+    def setUp(self):
+        self.tabelaHash = TabelaHashSondagemLinear(10)
+
+    def test_chave_inedita_consegue_inserir(self):
+        self.tabelaHash.inserir(15, "oie!")
+        pos = self.tabelaHash.funcao_hash(15)
+        self.assertEqual(self.tabelaHash.tabela[pos], (15, "oie!"))
+        self.assertEqual(self.tabelaHash.quantidade, 1)
+
+    def test_chave_repetida_atualiza_valor(self):
+        self.tabelaHash.inserir(15, "oie!")
+        pos = self.tabelaHash.funcao_hash(15)
+        self.assertEqual(self.tabelaHash.tabela[pos], (15, "oie!"))
+        self.tabelaHash.inserir(15, "tchauu!")
+        self.assertEqual(self.tabelaHash.tabela[pos], (15, "tchauu!"))
+        self.assertEqual(self.tabelaHash.quantidade, 1)
+
+    def test_tabela_cheia_levanta_OverflowError(self):
+        self.tabelaHash.inserir(1, "um")
+        self.tabelaHash.inserir(2, "dois")
+        self.tabelaHash.inserir(3, "tres")
+        self.tabelaHash.inserir(4, "quatro")
+        self.tabelaHash.inserir(5, "cinco")
+        self.tabelaHash.inserir(6, "seis")
+        self.tabelaHash.inserir(7, "sete")
+        self.tabelaHash.inserir(8, "oito")
+        self.tabelaHash.inserir(9, "nove")
+        self.tabelaHash.inserir(10, "dez")
+
+        self.assertEqual(self.tabelaHash.quantidade, 10)
+        with self.assertRaises(OverflowError):
+            self.tabelaHash.inserir(11, "overflow!!")
+    
+    def test_colisao_insere_na_melhor_posicao(self):
+        self.tabelaHash.inserir(1, "um")
+        self.tabelaHash.inserir(11, "colisao!!")
+
+        pos = (self.tabelaHash.funcao_hash(11) + 1) % self.tabelaHash.capacidade
+        self.assertEqual(self.tabelaHash.tabela[pos], (11, "colisao!!"))
+        self.assertEqual(self.tabelaHash.quantidade, 2)
 
     
 if __name__ == '__main__':
